@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+    <div id="navbar-container"></div>
+        <main class="main-content">
+            <div class="header-card">
+                <div>
+                    <h1>Welcome back, Alex!</h1>
+                    <p>Ready to continue your learning journey today?</p>
+                </div>
+                <div class="progress-circle">
+                    <span>67%</span>
+                    <div class="progress-label">Overall Progress</div>
+                </div>
+            </div>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-title">ACTIVE COURSES</div>
+                    <div class="summary-value">3</div>
+                    <div class="summary-desc">of 8 enrolled</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">CURRENT GPA</div>
+                    <div class="summary-value">3.8</div>
+                    <div class="summary-desc">↑ 0.2 from last semester</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">CREDITS EARNED</div>
+                    <div class="summary-value">45</div>
+                    <div class="summary-desc">75 required for graduation</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-title">APPLICATIONS</div>
+                    <div class="summary-value">12</div>
+                    <div class="summary-desc">placement applications</div>
+                </div>
+            </div>
+            <div class="main-row">
+                <section class="courses-section">
+                    <div class="section-header">
+                        <h2>My Courses</h2>
+                        <button class="view-all">View All</button>
+                    </div>
+                    <div class="course-card">
+                        <div class="course-title">Full Stack Web Development</div>
+                        <div class="course-meta">by Dr. Sarah Johnson &bull; 12 weeks &bull; Today, 2:00 PM</div>
+                        <div class="course-progress">
+                            <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+                            <span>75%</span>
+                            <span class="course-status active">Active</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="continue-btn">Continue Learning</button>
+                            <button class="details-btn">View Details</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="notifications-section">
+                    <h2>Notifications</h2>
+                    <div class="notification-list" id="notificationsList"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
