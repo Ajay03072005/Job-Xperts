@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Test Builder — Sakshi Sharma (Teacher)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo card" style="padding:10px;border-radius:10px">TS</div>
+      <div>
+        <h1 style="color:#000;">Test Builder</h1>
+        <div class="muted">Create mock/live tests, add sections, configure marking & shuffling</div>
+      </div>
+    </header>
+
+    <div class="card wizard">
+      <aside class="steps">
+        <div class="step-item active" data-step="1"><div><strong>1.</strong></div><div><div><strong>Basic Info</strong></div><small>Test name, type, duration</small></div></div>
+        <div class="step-item" data-step="2"><div><strong>2.</strong></div><div><div><strong>Sections</strong></div><small>Add, marks, negative</small></div></div>
+        <div class="step-item" data-step="3"><div><strong>3.</strong></div><div><div><strong>Advanced</strong></div><small>Shuffle & settings</small></div></div>
+        <div class="step-item" data-step="4"><div><strong>4.</strong></div><div><div><strong>Review</strong></div><small>Save / Publish</small></div></div>
+      </aside>
+
+      <main class="panel" id="panel">
+        <!-- Step content will be injected here -->
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
