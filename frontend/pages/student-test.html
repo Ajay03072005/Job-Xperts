@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JobsXperts — Test Runner</title>
+  <link rel="stylesheet" href="/assets/css/student.css" />
+  <style>
+    /* Backgrounds + layout */
+    body.jx-body {
+      background-color: #f9fafb; /* light gray */
+      color: #111827; /* near-black text */
+      font-family: 'Inter', sans-serif;
+    }
+    header.jx-topbar {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .jx-main {
+      display: flex;
+      background: #f9fafb;
+    }
+    .jx-nav {
+      background: #ffffff;
+      border-right: 1px solid #e5e7eb;
+    }
+    .jx-content {
+      background: #ffffff;
+      margin: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+
+    /* Buttons */
+    .jx-submit-btn {
+      background: #4f46e5; /* indigo */
+      color: #fff;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .jx-submit-btn:hover {
+      background: #4338ca;
+    }
+    .jx-nav-btn {
+      background: #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+    }
+    .jx-nav-btn:hover {
+      background: #d1d5db;
+    }
+    .jx-btn.primary {
+      background: #4f46e5;
+      color: white;
+      border-radius: 0.5rem;
+    }
+
+    /* Question pills */
+    .jx-q-pill {
+      background: #f3f4f6;
+      border-radius: 0.375rem;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .jx-q-pill.active {
+      background: #4f46e5;
+      color: white;
+    }
+
+    /* Warnings */
+    .jx-warning-banner {
+      background: #fee2e2; /* light red */
+      border: 1px solid #fca5a5;
+      color: #b91c1c;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+    .jx-warning-small {
+      color: #b91c1c;
+      font-size: 0.875rem;
+    }
+
+    /* Modal */
+    .jx-modal-inner {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="jx-body">
+  <!-- Top bar -->
+  <header class="jx-topbar">
+    <div class="jx-topbar-left">
+      <h1 id="test-title" class="jx-test-title">JobsXperts</h1>
+      <div id="test-meta" class="jx-test-meta">Section 1 · 25 Questions</div>
+    </div>
+    <div class="jx-topbar-right">
+      <div id="global-timer" class="jx-timer" aria-live="polite">
+        <svg class="jx-timer-ring" viewBox="0 0 36 36" aria-hidden="true"><path class="jx-ring-bg" d="M18 2a16 16 0 1 1 0 32A16 16 0 0 1 18 2z"/></svg>
+        <div class="jx-timer-content">
+          <div id="time-dd" class="jx-time-nums">00:00:00</div>
+          <div class="jx-time-label">Time left</div>
+        </div>
+      </div>
+      <div id="save-status" class="jx-save-pill">Saved</div>
+      <button id="submit-btn" class="jx-submit-btn">Submit</button>
+    </div>
+  </header>
+
+  <main class="jx-main">
+    <!-- Left: Question Navigation Panel -->
+    <aside class="jx-nav" aria-label="Question Navigation">
+      <div class="jx-nav-header">
+        <div class="jx-nav-title">Questions</div>
+        <div class="jx-nav-filters">
+          <button class="jx-filter-btn active" data-filter="all">All</button>
+          <button class="jx-filter-btn" data-filter="unanswered">Unanswered</button>
+          <button class="jx-filter-btn" data-filter="flagged">Flagged</button>
+        </div>
+      </div>
+      <div id="nav-sections" class="jx-sections">
+        <!-- Sections and question pills inserted by JS -->
+      </div>
+      <div class="jx-nav-footer">
+        <div class="jx-summary">Answered <span id="answered-count">0</span>/<span id="total-count">0</span></div>
+        <button id="grid-toggle" class="jx-grid-btn" title="Open question grid">Grid</button>
+      </div>
+    </aside>
+
+    <!-- Center: Question Area -->
+    <section class="jx-content" aria-live="polite">
+      <div id="question-pane" class="jx-question-pane">
+        <div class="jx-question-head">
+          <div id="question-number" class="jx-q-num">Q1</div>
+          <button id="flag-btn" class="jx-flag-btn" aria-pressed="false" title="Flag question">⚑</button>
+        </div>
+        <div id="question-stem" class="jx-question-stem">Loading question...</div>
+        <form id="options-form" class="jx-options" aria-labelledby="question-stem">
+          <!-- Options inserted by JS -->
+        </form>
+        <div class="jx-question-actions">
+          <button id="prev-btn" class="jx-nav-btn">Previous</button>
+          <button id="next-btn" class="jx-nav-btn">Next</button>
+        </div>
+      </div>
+
+      <!-- Confirm Submit Modal -->
+      <div id="confirm-modal" class="jx-modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+        <div class="jx-modal-inner">
+          <h2 id="confirm-title">Confirm Submission</h2>
+          <div id="confirm-body" class="jx-modal-body">
+            <p>You have answered <strong id="confirm-answered">0</strong> out of <strong id="confirm-total">0</strong> questions.</p>
+            <p>Flagged: <span id="confirm-flagged">0</span></p>
+            <p class="jx-warning-small">This will submit your attempt. You won't be able to change answers after submission.</p>
+          </div>
+          <div class="jx-modal-actions">
+            <button id="confirm-cancel" class="jx-btn">Review</button>
+            <button id="confirm-submit" class="jx-btn primary">Submit Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab-switch warning banner -->
+      <div id="tab-warning" class="jx-warning-banner hidden" role="alert">
+        <div>Tab switch detected. Please return to the test. Attempts to switch tabs are logged.</div>
+        <button id="tab-warning-close" class="jx-warning-close" aria-label="Dismiss">OK</button>
+      </div>
+    </section>
+  </main>
+
+  <template id="question-pill-tpl">
+    <div class="jx-q-pill" data-qid="">
+      <span class="jx-q-pill-num">1</span>
+      <span class="jx-q-pill-flag hidden" title="Flagged">⚑</span>
+    </div>
+  </template>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/student.js"></script>
+</body>
+</html>
+
